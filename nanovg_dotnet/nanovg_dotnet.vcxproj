@@ -74,21 +74,25 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)bin\x86\</OutDir>
     <TargetName>nanovg</TargetName>
+    <IncludePath>$(SolutionDir)nanovg\src\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)bin\x64\</OutDir>
     <TargetName>nanovg</TargetName>
+    <IncludePath>$(SolutionDir)nanovg\src\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)bin\x86\</OutDir>
     <TargetName>nanovg</TargetName>
+    <IncludePath>$(SolutionDir)nanovg\src\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)bin\x64\</OutDir>
     <TargetName>nanovg</TargetName>
+    <IncludePath>$(SolutionDir)nanovg\src\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -98,6 +102,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;NANOVGDOTNET_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <StructMemberAlignment>1Byte</StructMemberAlignment>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -113,6 +118,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;NANOVGDOTNET_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <StructMemberAlignment>1Byte</StructMemberAlignment>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -130,6 +136,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;NANOVGDOTNET_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <StructMemberAlignment>1Byte</StructMemberAlignment>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -149,6 +156,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;NANOVGDOTNET_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <StructMemberAlignment>1Byte</StructMemberAlignment>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
