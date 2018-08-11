@@ -15,10 +15,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="nanovg_dotnet.cpp">
+    <ClCompile Include="..\nanovg\src\nanovg.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\nanovg\src\nanovg.c">
+    <ClCompile Include="nanovg_dotnet.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

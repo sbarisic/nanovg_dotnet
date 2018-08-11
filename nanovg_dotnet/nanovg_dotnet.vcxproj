@@ -74,25 +74,29 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)bin\x86\</OutDir>
     <TargetName>nanovg</TargetName>
-    <IncludePath>$(SolutionDir)nanovg\src\;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)thirdparty\include\;$(SolutionDir)nanovg\src\;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)thirdparty\lib\x86\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)bin\x64\</OutDir>
     <TargetName>nanovg</TargetName>
-    <IncludePath>$(SolutionDir)nanovg\src\;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)thirdparty\include\;$(SolutionDir)nanovg\src\;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)thirdparty\lib\x64\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)bin\x86\</OutDir>
     <TargetName>nanovg</TargetName>
-    <IncludePath>$(SolutionDir)nanovg\src\;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)thirdparty\include\;$(SolutionDir)nanovg\src\;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)thirdparty\lib\x86\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)bin\x64\</OutDir>
     <TargetName>nanovg</TargetName>
-    <IncludePath>$(SolutionDir)nanovg\src\;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)thirdparty\include\;$(SolutionDir)nanovg\src\;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)thirdparty\lib\x64\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -168,7 +172,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\nanovg\src\nanovg.c" />
-    <ClCompile Include="nanovg_dotnet.cpp" />
+    <ClCompile Include="nanovg_dotnet.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\nanovg\src\fontstash.h" />

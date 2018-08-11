@@ -15,15 +15,15 @@ namespace NanoVG {
 		public Type DelegateType;
 	}
 
-	[UnmanagedFunctionPointer(NanoVG_Native.CConv)] delegate int renderCreateFunc(IntPtr uptr);
-	[UnmanagedFunctionPointer(NanoVG_Native.CConv)] delegate int renderCreateTextureFunc(IntPtr uptr, int type, int w, int h, NVGImageFlags imageFlags, IntPtr data);
-	[UnmanagedFunctionPointer(NanoVG_Native.CConv)] delegate int renderDeleteTextureFunc(IntPtr uptr, int image);
-	[UnmanagedFunctionPointer(NanoVG_Native.CConv)] delegate int renderUpdateTextureFunc(IntPtr uptr, int image, int x, int y, int w, int h, IntPtr data);
-	[UnmanagedFunctionPointer(NanoVG_Native.CConv)] delegate int renderGetTextureSizeFunc(IntPtr uptr, int image, out int w, out int h);
-	[UnmanagedFunctionPointer(NanoVG_Native.CConv)] delegate void renderViewportFunc(IntPtr uptr, float width, float height, float devicePixelRatio);
-	[UnmanagedFunctionPointer(NanoVG_Native.CConv)] delegate void renderCancelFunc(IntPtr uptr);
-	[UnmanagedFunctionPointer(NanoVG_Native.CConv)] delegate void renderFlushFunc(IntPtr uptr);
-	[UnmanagedFunctionPointer(NanoVG_Native.CConv)] delegate void renderDeleteFunc(IntPtr uptr);
+	[UnmanagedFunctionPointer(NVG.CConv)] delegate int renderCreateFunc(IntPtr uptr);
+	[UnmanagedFunctionPointer(NVG.CConv)] delegate int renderCreateTextureFunc(IntPtr uptr, int type, int w, int h, NVGImageFlags imageFlags, IntPtr data);
+	[UnmanagedFunctionPointer(NVG.CConv)] delegate int renderDeleteTextureFunc(IntPtr uptr, int image);
+	[UnmanagedFunctionPointer(NVG.CConv)] delegate int renderUpdateTextureFunc(IntPtr uptr, int image, int x, int y, int w, int h, IntPtr data);
+	[UnmanagedFunctionPointer(NVG.CConv)] delegate int renderGetTextureSizeFunc(IntPtr uptr, int image, out int w, out int h);
+	[UnmanagedFunctionPointer(NVG.CConv)] delegate void renderViewportFunc(IntPtr uptr, float width, float height, float devicePixelRatio);
+	[UnmanagedFunctionPointer(NVG.CConv)] delegate void renderCancelFunc(IntPtr uptr);
+	[UnmanagedFunctionPointer(NVG.CConv)] delegate void renderFlushFunc(IntPtr uptr);
+	[UnmanagedFunctionPointer(NVG.CConv)] delegate void renderDeleteFunc(IntPtr uptr);
 
 	// TODO
 	unsafe delegate void renderFillFunc(IntPtr UPtr, NVGPaint* Paint, NVGCompositeOpState Op, NVGScissor* Scsr, float Fringe, float* Bounds, NVGPath* Paths, int Num);
@@ -129,7 +129,29 @@ namespace NanoVG {
 		NVG_IMAGE_FLIPY = 1 << 3,       // Flips (inverses) image in Y direction when rendered.
 		NVG_IMAGE_PREMULTIPLIED = 1 << 4,       // Image data has premultiplied alpha.
 		NVG_IMAGE_NEAREST = 1 << 5,     // Image interpolation is Nearest instead Linear
-	};
+	}
+
+	public enum NVGSolidity : int {
+		NVG_SOLID = 1,          // CCW
+		NVG_HOLE = 2,           // CW
+	}
+
+	public enum NVGAlign : int {
+		// Horizontal align
+		NVG_ALIGN_LEFT = 1 << 0,    // Default, align text horizontally to left.
+		NVG_ALIGN_CENTER = 1 << 1,  // Align text horizontally to center.
+		NVG_ALIGN_RIGHT = 1 << 2,   // Align text horizontally to right.
+									// Vertical align
+		NVG_ALIGN_TOP = 1 << 3, // Align text vertically to top.
+		NVG_ALIGN_MIDDLE = 1 << 4,  // Align text vertically to middle.
+		NVG_ALIGN_BOTTOM = 1 << 5,  // Align text vertically to bottom.
+		NVG_ALIGN_BASELINE = 1 << 6, // Default, align text vertically to baseline.
+	}
+
+	public enum NVGWinding : int {
+		NVG_CCW = 1,            // Winding for solid shapes
+		NVG_CW = 2,             // Winding for holes
+	}
 
 	public unsafe abstract class NVGParameters {
 		public abstract int RenderCreate(IntPtr UPtr);

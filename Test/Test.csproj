@@ -45,17 +45,65 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\GlfwDotNet\Glfw\Glfw3\Glfw.cs">
+      <Link>Glfw3\Glfw.cs</Link>
+    </Compile>
+    <Compile Include="..\GlfwDotNet\Glfw\Glfw3\Glfw.Delegate.cs">
+      <Link>Glfw3\Glfw.Delegate.cs</Link>
+    </Compile>
+    <Compile Include="..\GlfwDotNet\Glfw\Glfw3\Glfw.Enum.cs">
+      <Link>Glfw3\Glfw.Enum.cs</Link>
+    </Compile>
+    <Compile Include="..\GlfwDotNet\Glfw\Glfw3\Glfw.Func.cs">
+      <Link>Glfw3\Glfw.Func.cs</Link>
+    </Compile>
+    <Compile Include="..\GlfwDotNet\Glfw\Glfw3\Glfw.Struct.cs">
+      <Link>Glfw3\Glfw.Struct.cs</Link>
+    </Compile>
+    <Compile Include="Generator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="data\fonts\entypo.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="data\fonts\NotoEmoji-Regular.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="data\fonts\Roboto-Bold.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="data\fonts\Roboto-Light.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="data\fonts\Roboto-Regular.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NanoVG_Binding\NanoVG_Binding.csproj">
       <Project>{b992513c-860a-41f3-a3e7-9b3c9d3c38e4}</Project>
       <Name>NanoVG_Binding</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="functions.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="x64\glew32.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="x64\glfw3.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="x86\glew32.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="x86\glfw3.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
