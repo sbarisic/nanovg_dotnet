@@ -21,6 +21,9 @@ than Windows, but i do not have any way to test righ now
 ## Example
 
 ```csharp
+// This sets the native nanovg directory so you can ship both
+// x86 and x64 versions of original nanovg library, and only
+// one .NET executable
 NVG.SetLibraryDirectory();
 
 IntPtr Ctx = NVG.CreateGL3Glew(3);
