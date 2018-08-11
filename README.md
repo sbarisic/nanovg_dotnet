@@ -21,10 +21,16 @@ than Windows, but i do not have any way to test righ now
 ## Example
 
 ```csharp
+// This sets the native nanovg directory so you can ship both
+// x86 and x64 versions of original nanovg library, and only
+// one .NET executable
 NVG.SetLibraryDirectory();
 
+// This is optional and may not exist in the resulting binary if compiled
+// from this solution if NANOVG_DOTNET_COMPILE_GL3 isn't defined
 NanoVGContext Ctx = NVG.CreateGL3Glew(3);
-// or
+
+// or if you want to implement your own renderer
 NanoVGContext Ctx = NVG.CreateContext(new CustomParameters()); // CustomParameters inherits from NanoVG.NVGParameters
 
 // ...
