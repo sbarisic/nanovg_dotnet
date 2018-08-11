@@ -26,8 +26,11 @@ than Windows, but i do not have any way to test righ now
 // one .NET executable
 NVG.SetLibraryDirectory();
 
+// This is optional and may not exist in the resulting binary if compiled
+// from this solution if NANOVG_DOTNET_COMPILE_GL3 isn't defined
 IntPtr Ctx = NVG.CreateGL3Glew(3);
-// or
+
+// If you want to implement your own renderer
 IntPtr Ctx = NVG.CreateContext(new CustomParameters()); // CustomParameters inherits from NanoVG.NVGParameters
 
 // ...
