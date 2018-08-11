@@ -1,19 +1,22 @@
 # nanovg_dotnet
-.NET binding for nanovg
 
 ![alt text](https://raw.githubusercontent.com/sbarisic/nanovg_dotnet/master/screenshots/a.png "A")
 
-Demo application window is created with GLFW.Net and uses the built in
-OpenGL 3.2 NanoVG context
+.NET binding for nanovg using P/Invoke
 
-Custom rendering contexts can be created by implementing a class which
-inherits from NanoVG.NVGParameters
+Demo application window is created with GLFW.Net and uses the built in
+OpenGL 3.2 NanoVG context. Custom rendering contexts can be created by implementing
+a class which inherits from NanoVG.NVGParameters. Source in ``Test/Program.cs``
+
+This binding uses System.Numerics vectors as much as possible, currently for colors and vertices,
+as they mach with the ones on the C side.
 
 This works on both x86 and x64, it should also work on platforms other
 than Windows, but i do not have any way to test righ now
 
 ## TODO
 * All string functions should take a byte array and include an overload which automatically converts to UTF-8
+* Fill in this TODO list
 
 ## Example
 
