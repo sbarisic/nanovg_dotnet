@@ -54,10 +54,10 @@ namespace Test {
 			int y = 0;
 
 			// Widgets
-			DrawWindow(vg, "Widgets 'n Stuff 😂", 50, 50, 300, 400);
+			DrawWindow(vg, "Widgets 'n Stuff", 50, 50, 300, 400);
 			x = 60;
 			y = 95;
-			DrawSearchBox(vg, "Search", x, y, 280, 25);
+			DrawSearchBox(vg, "Search 😂🔫", x, y, 280, 25);
 
 			DrawColorWheel(vg, 300, 150, 400, 400, 1);
 		}
@@ -126,54 +126,52 @@ namespace Test {
 			return str;
 		}
 
-		static void DrawWindow(IntPtr vg, string title, float x, float y, float w, float h) {
-			float cornerRadius = 3;
-			NVGPaint shadowPaint;
-			NVGPaint headerPaint;
-
-			NVG.Save(vg);
-			//	NVG.ClearState(vg);
+		static void DrawWindow(IntPtr Ctx, string Title, float X, float Y, float W, float H) {
+			float CornerRadius = 3;
+			NVGPaint ShadowPaint;
+			NVGPaint HeaderPaint;
+			NVG.Save(Ctx);
 
 			// Window
-			NVG.BeginPath(vg);
-			NVG.RoundedRect(vg, x, y, w, h, cornerRadius);
-			NVG.FillColor(vg, NVG.RGBA(28, 30, 34, 192));
-			NVG.Fill(vg);
+			NVG.BeginPath(Ctx);
+			NVG.RoundedRect(Ctx, X, Y, W, H, CornerRadius);
+			NVG.FillColor(Ctx, NVG.RGBA(28, 30, 34, 192));
+			NVG.Fill(Ctx);
 
 			// Drop shadow
-			shadowPaint = NVG.BoxGradient(vg, x, y + 2, w, h, cornerRadius * 2, 10, NVG.RGBA(0, 0, 0, 128), NVG.RGBA(0, 0, 0, 0));
-			NVG.BeginPath(vg);
-			NVG.Rect(vg, x - 10, y - 10, w + 20, h + 30);
-			NVG.RoundedRect(vg, x, y, w, h, cornerRadius);
-			NVG.PathWinding(vg, NVGSolidity.NVG_HOLE);
-			NVG.FillPaint(vg, shadowPaint);
-			NVG.Fill(vg);
+			ShadowPaint = NVG.BoxGradient(Ctx, X, Y + 2, W, H, CornerRadius * 2, 10, NVG.RGBA(0, 0, 0, 128), NVG.RGBA(0, 0, 0, 0));
+			NVG.BeginPath(Ctx);
+			NVG.Rect(Ctx, X - 10, Y - 10, W + 20, H + 30);
+			NVG.RoundedRect(Ctx, X, Y, W, H, CornerRadius);
+			NVG.PathWinding(Ctx, NVGSolidity.NVG_HOLE);
+			NVG.FillPaint(Ctx, ShadowPaint);
+			NVG.Fill(Ctx);
 
 			// Header
-			headerPaint = NVG.LinearGradient(vg, x, y, x, y + 15, NVG.RGBA(255, 255, 255, 8), NVG.RGBA(0, 0, 0, 16));
-			NVG.BeginPath(vg);
-			NVG.RoundedRect(vg, x + 1, y + 1, w - 2, 30, cornerRadius - 1);
-			NVG.FillPaint(vg, headerPaint);
-			NVG.Fill(vg);
-			NVG.BeginPath(vg);
-			NVG.MoveTo(vg, x + 0.5f, y + 0.5f + 30);
-			NVG.LineTo(vg, x + 0.5f + w - 1, y + 0.5f + 30);
-			NVG.StrokeColor(vg, NVG.RGBA(0, 0, 0, 32));
-			NVG.Stroke(vg);
+			HeaderPaint = NVG.LinearGradient(Ctx, X, Y, X, Y + 15, NVG.RGBA(255, 255, 255, 8), NVG.RGBA(0, 0, 0, 16));
+			NVG.BeginPath(Ctx);
+			NVG.RoundedRect(Ctx, X + 1, Y + 1, W - 2, 30, CornerRadius - 1);
+			NVG.FillPaint(Ctx, HeaderPaint);
+			NVG.Fill(Ctx);
+			NVG.BeginPath(Ctx);
+			NVG.MoveTo(Ctx, X + 0.5f, Y + 0.5f + 30);
+			NVG.LineTo(Ctx, X + 0.5f + W - 1, Y + 0.5f + 30);
+			NVG.StrokeColor(Ctx, NVG.RGBA(0, 0, 0, 32));
+			NVG.Stroke(Ctx);
 
-			NVG.FontSize(vg, 18.0f);
-			NVG.FontFace(vg, "sans-bold");
-			NVG.TextAlign(vg, NVGAlign.NVG_ALIGN_CENTER | NVGAlign.NVG_ALIGN_MIDDLE);
+			NVG.FontSize(Ctx, 18.0f);
+			NVG.FontFace(Ctx, "sans-bold");
+			NVG.TextAlign(Ctx, NVGAlign.NVG_ALIGN_CENTER | NVGAlign.NVG_ALIGN_MIDDLE);
 
-			NVG.FontBlur(vg, 2);
-			NVG.FillColor(vg, NVG.RGBA(0, 0, 0, 128));
-			NVG.Text(vg, x + w / 2, y + 16 + 1, title, null);
+			NVG.FontBlur(Ctx, 2);
+			NVG.FillColor(Ctx, NVG.RGBA(0, 0, 0, 128));
+			NVG.Text(Ctx, X + W / 2, Y + 16 + 1, Title, null);
 
-			NVG.FontBlur(vg, 0);
-			NVG.FillColor(vg, NVG.RGBA(220, 220, 220, 160));
-			NVG.Text(vg, x + w / 2, y + 16, title, null);
+			NVG.FontBlur(Ctx, 0);
+			NVG.FillColor(Ctx, NVG.RGBA(220, 220, 220, 160));
+			NVG.Text(Ctx, X + W / 2, Y + 16, Title, null);
 
-			NVG.Restore(vg);
+			NVG.Restore(Ctx);
 		}
 
 		static void DrawSearchBox(IntPtr vg, string text, float x, float y, float w, float h) {
