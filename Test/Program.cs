@@ -11,7 +11,14 @@ using NanoVG;
 
 namespace Test {
 	static class Program {
+		[DllImport("opengl32")]
+		static extern void glClear(int Mask = 16384 | 1024 | 256);
+
 		static void Main(string[] args) {
+			/*Generator.Generate();
+			Console.WriteLine("Done!");
+			Console.ReadLine();*/
+
 			NVG.SetLibraryDirectory();
 			Glfw.Init();
 
@@ -20,36 +27,36 @@ namespace Test {
 			Glfw.WindowHint(Glfw.Hint.OpenglForwardCompat, true);
 			Glfw.WindowHint(Glfw.Hint.OpenglProfile, Glfw.OpenGLProfile.Core);
 
-			Glfw.WindowHint(Glfw.Hint.Samples, 4);
+			Glfw.WindowHint(Glfw.Hint.Samples, 16);
 
 			Glfw.Window Wnd = Glfw.CreateWindow(800, 600, "NanoVG.NET");
 			Glfw.MakeContextCurrent(Wnd);
 			Glfw.GetFramebufferSize(Wnd, out int FbW, out int FbH);
 
-			IntPtr Ctx = NVG.CreateGL3Glew(3);
+			NanoVGContext Ctx = NVG.CreateGL3Glew(3);
 			Glfw.SwapInterval(0);
 
-			int Icons = NVG.CreateFont(Ctx, "icons", "data/fonts/entypo.ttf");
-			int Sans = NVG.CreateFont(Ctx, "sans", "data/fonts/Roboto-Regular.ttf");
-			int SansBold = NVG.CreateFont(Ctx, "sans-bold", "data/fonts/Roboto-Bold.ttf");
-			int Emoji = NVG.CreateFont(Ctx, "emoji", "data/fonts/NotoEmoji-Regular.ttf");
-			//NVG.CreateFont(Ctx, "sans-bold", "data/fonts/Roboto-Bold.ttf");
+			int Icons = Ctx.CreateFont("icons", "data/fonts/entypo.ttf");
+			int Sans = Ctx.CreateFont("sans", "data/fonts/Roboto-Regular.ttf");
+			int SansBold = Ctx.CreateFont("sans-bold", "data/fonts/Roboto-Bold.ttf");
+			int Emoji = Ctx.CreateFont("emoji", "data/fonts/NotoEmoji-Regular.ttf");
 
-			NVG.AddFallbackFontId(Ctx, Sans, Emoji);
-			NVG.AddFallbackFontId(Ctx, SansBold, Emoji);
+			Ctx.AddFallbackFontId(Sans, Emoji);
+			Ctx.AddFallbackFontId(SansBold, Emoji);
 
 			while (!Glfw.WindowShouldClose(Wnd)) {
-				NVG.BeginFrame(Ctx, 800, 600, (float)FbW / FbH);
+				glClear();
+				Ctx.BeginFrame(800, 600, (float)FbW / FbH);
 
 				Demo(Ctx);
 
-				NVG.EndFrame(Ctx);
+				Ctx.EndFrame();
 				Glfw.SwapBuffers(Wnd);
 				Glfw.PollEvents();
 			}
 		}
 
-		static void Demo(IntPtr vg) {
+		static void Demo(NanoVGContext vg) {
 			int x = 0;
 			int y = 0;
 
@@ -126,55 +133,55 @@ namespace Test {
 			return str;
 		}
 
-		static void DrawWindow(IntPtr Ctx, string Title, float X, float Y, float W, float H) {
+		static void DrawWindow(NanoVGContext Ctx, string Title, float X, float Y, float W, float H) {
 			float CornerRadius = 3;
 			NVGPaint ShadowPaint;
 			NVGPaint HeaderPaint;
-			NVG.Save(Ctx);
+			Ctx.Save();
 
 			// Window
-			NVG.BeginPath(Ctx);
-			NVG.RoundedRect(Ctx, X, Y, W, H, CornerRadius);
-			NVG.FillColor(Ctx, NVG.RGBA(28, 30, 34, 192));
-			NVG.Fill(Ctx);
+			Ctx.BeginPath();
+			Ctx.RoundedRect(X, Y, W, H, CornerRadius);
+			Ctx.FillColor(NVG.RGBA(28, 30, 34, 192));
+			Ctx.Fill();
 
 			// Drop shadow
-			ShadowPaint = NVG.BoxGradient(Ctx, X, Y + 2, W, H, CornerRadius * 2, 10, NVG.RGBA(0, 0, 0, 128), NVG.RGBA(0, 0, 0, 0));
-			NVG.BeginPath(Ctx);
-			NVG.Rect(Ctx, X - 10, Y - 10, W + 20, H + 30);
-			NVG.RoundedRect(Ctx, X, Y, W, H, CornerRadius);
-			NVG.PathWinding(Ctx, NVGSolidity.NVG_HOLE);
-			NVG.FillPaint(Ctx, ShadowPaint);
-			NVG.Fill(Ctx);
+			ShadowPaint = Ctx.BoxGradient(X, Y + 2, W, H, CornerRadius * 2, 10, NVG.RGBA(0, 0, 0, 128), NVG.RGBA(0, 0, 0, 0));
+			Ctx.BeginPath();
+			Ctx.Rect(X - 10, Y - 10, W + 20, H + 30);
+			Ctx.RoundedRect(X, Y, W, H, CornerRadius);
+			Ctx.PathWinding(NVGSolidity.NVG_HOLE);
+			Ctx.FillPaint(ShadowPaint);
+			Ctx.Fill();
 
 			// Header
-			HeaderPaint = NVG.LinearGradient(Ctx, X, Y, X, Y + 15, NVG.RGBA(255, 255, 255, 8), NVG.RGBA(0, 0, 0, 16));
-			NVG.BeginPath(Ctx);
-			NVG.RoundedRect(Ctx, X + 1, Y + 1, W - 2, 30, CornerRadius - 1);
-			NVG.FillPaint(Ctx, HeaderPaint);
-			NVG.Fill(Ctx);
-			NVG.BeginPath(Ctx);
-			NVG.MoveTo(Ctx, X + 0.5f, Y + 0.5f + 30);
-			NVG.LineTo(Ctx, X + 0.5f + W - 1, Y + 0.5f + 30);
-			NVG.StrokeColor(Ctx, NVG.RGBA(0, 0, 0, 32));
-			NVG.Stroke(Ctx);
+			HeaderPaint = Ctx.LinearGradient(X, Y, X, Y + 15, NVG.RGBA(255, 255, 255, 8), NVG.RGBA(0, 0, 0, 16));
+			Ctx.BeginPath();
+			Ctx.RoundedRect(X + 1, Y + 1, W - 2, 30, CornerRadius - 1);
+			Ctx.FillPaint(HeaderPaint);
+			Ctx.Fill();
+			Ctx.BeginPath();
+			Ctx.MoveTo(X + 0.5f, Y + 0.5f + 30);
+			Ctx.LineTo(X + 0.5f + W - 1, Y + 0.5f + 30);
+			Ctx.StrokeColor(NVG.RGBA(0, 0, 0, 32));
+			Ctx.Stroke();
 
-			NVG.FontSize(Ctx, 18.0f);
-			NVG.FontFace(Ctx, "sans-bold");
-			NVG.TextAlign(Ctx, NVGAlign.NVG_ALIGN_CENTER | NVGAlign.NVG_ALIGN_MIDDLE);
+			Ctx.FontSize(18.0f);
+			Ctx.FontFace("sans-bold");
+			Ctx.TextAlign(NVGAlign.NVG_ALIGN_CENTER | NVGAlign.NVG_ALIGN_MIDDLE);
 
-			NVG.FontBlur(Ctx, 2);
-			NVG.FillColor(Ctx, NVG.RGBA(0, 0, 0, 128));
-			NVG.Text(Ctx, X + W / 2, Y + 16 + 1, Title, null);
+			Ctx.FontBlur(2);
+			Ctx.FillColor(NVG.RGBA(0, 0, 0, 128));
+			Ctx.Text(X + W / 2, Y + 16 + 1, Title, null);
 
-			NVG.FontBlur(Ctx, 0);
-			NVG.FillColor(Ctx, NVG.RGBA(220, 220, 220, 160));
-			NVG.Text(Ctx, X + W / 2, Y + 16, Title, null);
+			Ctx.FontBlur(0);
+			Ctx.FillColor(NVG.RGBA(220, 220, 220, 160));
+			Ctx.Text(X + W / 2, Y + 16, Title, null);
 
-			NVG.Restore(Ctx);
+			Ctx.Restore();
 		}
 
-		static void DrawSearchBox(IntPtr vg, string text, float x, float y, float w, float h) {
+		static void DrawSearchBox(NanoVGContext vg, string text, float x, float y, float w, float h) {
 			NVGPaint bg;
 			float cornerRadius = h / 2 - 1;
 
@@ -184,11 +191,6 @@ namespace Test {
 			NVG.RoundedRect(vg, x, y, w, h, cornerRadius);
 			NVG.FillPaint(vg, bg);
 			NVG.Fill(vg);
-
-			/*	NVG.BeginPath(vg);
-				NVG.RoundedRect(vg, x+0.5f,y+0.5f, w-1,h-1, cornerRadius-0.5f);
-				NVG.StrokeColor(vg, NVG.RGBA(0,0,0,48));
-				NVG.Stroke(vg);*/
 
 			NVG.FontSize(vg, h * 1.3f);
 			NVG.FontFace(vg, "icons");
@@ -210,18 +212,13 @@ namespace Test {
 			NVG.Text(vg, x + w - h * 0.55f, y + h * 0.55f, cpToUTF8(ICON_CIRCLED_CROSS), null);
 		}
 
-		static void DrawColorWheel(IntPtr vg, float x, float y, float w, float h, float t) {
+		static void DrawColorWheel(NanoVGContext vg, float x, float y, float w, float h, float t) {
 			int i;
 			float r0, r1, ax, ay, bx, by, cx, cy, aeps, r;
 			float hue = (float)Math.Sin(t * 0.12f);
 			NVGPaint paint;
 
 			NVG.Save(vg);
-
-			/*	NVG.BeginPath(vg);
-				NVG.Rect(vg, x,y,w,h);
-				NVG.FillColor(vg, NVG.RGBA(255,0,0,128));
-				NVG.Fill(vg);*/
 
 			cx = x + w * 0.5f;
 			cy = y + h * 0.5f;
@@ -313,5 +310,7 @@ namespace Test {
 
 			NVG.Restore(vg);
 		}
+
+		//*/
 	}
 }

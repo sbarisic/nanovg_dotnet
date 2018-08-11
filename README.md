@@ -23,13 +23,13 @@ than Windows, but i do not have any way to test righ now
 ```csharp
 NVG.SetLibraryDirectory();
 
-IntPtr Ctx = NVG.CreateGL3Glew(3);
+NanoVGContext Ctx = NVG.CreateGL3Glew(3);
 // or
-IntPtr Ctx = NVG.CreateContext(new CustomParameters()); // CustomParameters inherits from NanoVG.NVGParameters
+NanoVGContext Ctx = NVG.CreateContext(new CustomParameters()); // CustomParameters inherits from NanoVG.NVGParameters
 
 // ...
 
-static void DrawWindow(IntPtr Ctx, string Title, float X, float Y, float W, float H) {
+static void DrawWindow(NanoVGContext Ctx, string Title, float X, float Y, float W, float H) {
 	float CornerRadius = 3;
 	NVGPaint ShadowPaint;
 	NVGPaint HeaderPaint;
@@ -77,3 +77,16 @@ static void DrawWindow(IntPtr Ctx, string Title, float X, float Y, float W, floa
 	NVG.Restore(Ctx);
 }
 ```
+
+All NVG methods are implemented as extension methods, so these are interchargable
+
+```csharp
+NanoVGContext Ctx = NVG.CreateContext(/* ... */);
+
+NVG.BeginPath(Ctx);
+NVG.FontBlur(Ctx, 2);
+
+// and
+
+Ctx.BeginPath();
+Ctx.FontBlur(2);
